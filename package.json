@@ -1,0 +1,32 @@
+{
+  "name": "raluce-ecommerce-plugin",
+  "version": "0.1.0",
+  "description": "Add ecommerce to your site in seconds not weeks!",
+  "main": "src/index.js",
+  "scripts": {
+    "build:dev": "webpack --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raluce/raluce-ecommerce-plugin.git"
+  },
+  "keywords": [
+    "raluce",
+    "ecommerce",
+    "plugin"
+  ],
+  "author": "Raluce LLC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Raluce/raluce-ecommerce-plugin/issues"
+  },
+  "homepage": "https://github.com/Raluce/raluce-ecommerce-plugin#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
