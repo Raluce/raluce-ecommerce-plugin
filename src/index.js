@@ -1,18 +1,6 @@
-import Raluce from '@raluce/raluce';
+import RalucePlugin from './RalucePlugin';
 
-class RalucePlugin {
-  constructor(brandId) {
-    if (!brandId) throw new Error('Missing brandId');
-
-    this.raluce = new Raluce();
-    this.brandId = brandId;
-  }
-
-  async init() {
-    const { raluce, brandId } = this;
-
-    this.catalog = await raluce.getBrandById(brandId);
-  }
-}
-
-export default RalucePlugin;
+global.RaluceEcommercePluginInit = brandId => {
+  global.ralucePlugin = new RalucePlugin(brandId);
+  ralucePlugin.init();
+};
