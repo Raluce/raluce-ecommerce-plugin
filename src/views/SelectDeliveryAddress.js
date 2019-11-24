@@ -1,4 +1,5 @@
 import * as addressSearch from '../utils/addressSearch';
+import { featureToAddress } from '../utils/parsers';
 
 function beginAutocorrect() {
   const input = document.getElementById('address-input');
@@ -14,7 +15,11 @@ function beginAutocorrect() {
     }
 
     addressAutocompleteList.innerHTML = addressSearch.getResults()
-      .map(result => `<button>${result.place_name.replace(', United States', ', US')}</button>`)
+      .map(result => {
+        const parsedAddress = JSON.stringify(featureToAddress(result));
+
+        return `<button onclick='ralucePlugin.goToSelectFranchiseForDelivery(${parsedAddress})'>${result.place_name.replace(', United States', ', US')}</button>`;
+      })
       .join('');
   });
 }

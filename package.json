@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.9.0",
-    "@raluce/raluce": "^0.2.1",
+    "@raluce/raluce": "^0.3.1",
     "throttle-debounce": "^2.1.0"
   }
 }

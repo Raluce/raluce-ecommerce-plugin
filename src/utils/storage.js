@@ -5,8 +5,8 @@ export const OrderType = {
   pickup: 'pickup'
 };
 
-export function setOrderSession(franchiseId, orderType) {
-  sessionStorage.setItem(orderSessionKey, JSON.stringify({ franchiseId, orderType }));
+export function setOrderSession(franchiseId, orderType, address = undefined) {
+  sessionStorage.setItem(orderSessionKey, JSON.stringify({ franchiseId, orderType, address }));
 }
 
 export function getOrderSession() {

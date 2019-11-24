@@ -1,7 +1,7 @@
 import Raluce from '@raluce/raluce';
 
 import { OrderType, setOrderSession, getOrderSession, clear } from './utils/storage';
-
+import { featureToAddress } from './utils/parsers';
 import { createViews } from './views';
 
 const rootDiv = document.getElementById('raluce-ecommerce-plugin-root');
@@ -15,6 +15,7 @@ class RalucePlugin {
     this.brandId = brandId;
     this.brand = null;
     this.franchise = null;
+    this.address = null;
 
     this.views = createViews(this);
     this.viewsHistory = [];
@@ -31,7 +32,7 @@ class RalucePlugin {
     if (!orderSession) {
       this.setView(this.views.home);
     } else if (orderSession.orderType === OrderType.pickup) {
-      this.goToCatalog(orderSession.franchiseId, orderSession.orderType);
+      this.goToCatalog(orderSession.franchiseId);
     } else if (orderSession.orderType === OrderType.delivery) {
       // Todo
     }
@@ -68,14 +69,33 @@ class RalucePlugin {
     }
   }
 
-  async goToCatalog(franchiseId, orderType) {
+  async goToCatalog(franchiseId, address = undefined) {
     this.franchise = await this.raluce.getFranchiseById(franchiseId);
     if (!this.franchise) return;
 
-    setOrderSession(franchiseId, orderType || OrderType.pickup);
+    setOrderSession(franchiseId, address ? OrderType.delivery : OrderType.pickup, address);
 
     this.setView(this.views.catalog);
   }
+
+  async goToSelectFranchiseForDelivery(address) {
+    this.address = address;
+
+    const franchisesNearby = await this.raluce.getFranchiesDeliveryingToZipcode(this.brandId, address.zipcode);
+    if (franchisesNearby.length === 0) {
+      this.setView(this.views.noDeliveryToZipcode);
+      return;
+    }
+
+    this.franchise = await this.raluce.getFranchiseById(franchisesNearby[0].id);
+    if (!this.franchise) return;
+
+    setOrderSession(this.franchise.id, OrderType.delivery, address);
+
+    this.setView(this.views.catalog);
+  }
+
+
 }
 
 export default RalucePlugin;

@@ -1,5 +1,3 @@
-import { OrderType } from '../utils/storage';
-
 class SelectPickupFranchise {
   constructor(context) {
     this.name = 'selectPickupFranchise',
@@ -12,7 +10,7 @@ class SelectPickupFranchise {
     return [...franchises.map(franchise => {
       const { address } = franchise;
 
-      return `<button onclick="ralucePlugin.goToCatalog('${franchise.id}', '${OrderType.pickup}')">${address.line1}, ${address.city}, ${address.state} ${address.zipcode}</button>`;
+      return `<button onclick="ralucePlugin.goToCatalog('${franchise.id}')">${address.line1}, ${address.city}, ${address.state} ${address.zipcode}</button>`;
     }), '<button onclick="ralucePlugin.goBack()">Return</button>'].join('');
   }
 }
