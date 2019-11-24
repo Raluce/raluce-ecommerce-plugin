@@ -5,10 +5,11 @@ class Home {
   }
 
   async render() {
+    const deliveryViewName = this.context.views.selectDeliveryAddress.name;
     const pickupViewName = this.context.views.selectPickupFranchise.name;
 
     return `
-      <button>Delivery</button>
+      <button onclick="ralucePlugin.navigateTo('${deliveryViewName}')">Delivery</button>
       <button onclick="ralucePlugin.navigateTo('${pickupViewName}')">Pickup</button>
     `;
   }

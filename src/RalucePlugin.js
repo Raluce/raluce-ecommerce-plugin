@@ -1,18 +1,16 @@
 import Raluce from '@raluce/raluce';
 
 import { OrderType, setOrderSession, getOrderSession, clear } from './utils/storage';
-import AddressSearch from './utils/AddressSearch';
 
 import { createViews } from './views';
 
-const rootDiv = document.getElementById("raluce-ecommerce-plugin-root");
+const rootDiv = document.getElementById('raluce-ecommerce-plugin-root');
 
 class RalucePlugin {
   constructor(brandId) {
     if (!brandId) throw new Error('Missing brandId');
 
     this.raluce = new Raluce();
-    this.addressSearch = new AddressSearch();
 
     this.brandId = brandId;
     this.brand = null;

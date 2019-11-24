@@ -5,38 +5,36 @@ const geocodingClient = mbxGeocoding({
   accessToken: 'pk.eyJ1IjoiY2FtaWxvODYiLCJhIjoiY2puMHdueWUyMDB3MjNtcjQzdzdvdHZndCJ9.kfbDbGDHOcdcEA3vimZaAw',
 });
 
-class AddressSearch {
-  constructor() {
-    this.results = [];
+let results = [];
 
-    this.throttledAutocomplete = throttle(500, this.search);
-    this.debounceAutocomplete = debounce(500, this.search);
-  }
-
-  search(address) {
-    if (address.length === 0 || !address.trim()) {
-      this.onCleanResult();
-    }
-
-    geocodingClient
-      .forwardGeocode({
-        query: address,
-        countries: ['us'],
-        types: ['address'],
-        autocomplete: true,
-      })
-      .send()
-      .then(this.onResult)
-      .catch(this.onCleanResult);
-  }
-
-  onResult(result) {
-    this.results = result.body.features;
-  }
-
-  onCleanResult() {
-    this.results = [];
-  }
+function handleResult(result) {
+  results = result.body.features;
 }
 
-export default AddressSearch;
+function search(address) {
+  if (address.length === 0 || !address.trim()) {
+    clear();
+  }
+
+  geocodingClient
+    .forwardGeocode({
+      query: address,
+      countries: ['us'],
+      types: ['address'],
+      autocomplete: true,
+    })
+    .send()
+    .then(handleResult)
+    .catch(clear);
+}
+
+export function getResults() {
+  return results;
+}
+
+export function clear() {
+  results = [];
+}
+
+export const throttledAutocomplete = throttle(500, search);
+export const debounceAutocomplete = debounce(500, search);
