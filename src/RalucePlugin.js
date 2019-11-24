@@ -1,7 +1,6 @@
 import Raluce from '@raluce/raluce';
 
 import { OrderType, setOrderSession, getOrderSession, clear } from './utils/storage';
-import { featureToAddress } from './utils/parsers';
 import { createViews } from './views';
 
 const rootDiv = document.getElementById('raluce-ecommerce-plugin-root');
@@ -82,6 +81,7 @@ class RalucePlugin {
     this.address = address;
 
     const franchisesNearby = await this.raluce.getFranchiesDeliveryingToZipcode(this.brandId, address.zipcode);
+
     if (franchisesNearby.length === 0) {
       this.setView(this.views.noDeliveryToZipcode);
       return;
