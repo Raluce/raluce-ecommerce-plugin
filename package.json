@@ -28,5 +28,8 @@
     "babel-loader": "^8.0.6",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "@raluce/raluce": "^0.2.0"
   }
 }
