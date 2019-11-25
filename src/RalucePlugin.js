@@ -10,6 +10,7 @@ class RalucePlugin {
     if (!brandId) throw new Error('Missing brandId');
 
     this.raluce = new Raluce();
+    this.contentDiv = null;
 
     this.brandId = brandId;
     this.brand = null;
@@ -28,6 +29,8 @@ class RalucePlugin {
 
     const orderSession = getOrderSession();
 
+    this.contentDivConfig();
+
     if (!orderSession) {
       this.setView(this.views.home);
     } else if (orderSession.orderType === OrderType.pickup) {
@@ -35,6 +38,23 @@ class RalucePlugin {
     } else if (orderSession.orderType === OrderType.delivery) {
       // Todo
     }
+  }
+
+  contentDivConfig() {
+    const { banner, color } = this.brand;
+
+    if (banner && color) {
+      rootDiv.innerHTML = `
+        <div class="raluce-ecommerce-plugin-picture-box" style="background-image: url('${banner}');"></div>
+        <div class="raluce-ecommerce-plugin-color-box" style="background-color: ${color};"></div>
+      `;
+    }
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'raluce-ecommerce-plugin-content';
+
+    this.contentDiv = contentDiv;
+    rootDiv.appendChild(contentDiv);
   }
 
   setView(view) {
@@ -46,7 +66,7 @@ class RalucePlugin {
         self.viewsHistory.push(view.name);
       }
 
-      rootDiv.innerHTML = html;
+      self.contentDiv.innerHTML = html;
     }).catch(console.error);
   }
 
@@ -87,12 +107,7 @@ class RalucePlugin {
       return;
     }
 
-    this.franchise = await this.raluce.getFranchiseById(franchisesNearby[0].id);
-    if (!this.franchise) return;
-
-    setOrderSession(this.franchise.id, OrderType.delivery, address);
-
-    this.setView(this.views.catalog);
+    this.goToCatalog(franchisesNearby[0].id, address);
   }
 
 

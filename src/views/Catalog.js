@@ -13,11 +13,20 @@ class Catalog {
       const { name, products } = category;
 
       return `
-        <div>
-          <h1>${name}</h1>
-          <ul>
-            ${products.map(p => `<li>${p.name} (${PriceFormatter.format(p.price.cost)})</li>`).join('')}
-          </ul>
+        <div class="raluce-ecommerce-category-box">
+          <h3 class="raluce-ecommerce-category-name">${name}</h3>
+          <div class="raluce-ecommerce-category-products-box">
+            ${products.map(p => `
+              <div class="raluce-ecommerce-product-box">
+                <div class="raluce-ecommerce-product-image" style="background-image:url('${p.image}');"></div>
+                <div class="raluce-ecommerce-text-box">
+                  <p class="raluce-ecommerce-product-cost">$${PriceFormatter.format(p.price.cost)}</p>
+                  <p class="raluce-ecommerce-product-name">${p.name}</p>
+                  <p class="raluce-ecommerce-product-description">${p.description}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
         </div>
       `;
     }), "<button onclick='ralucePlugin.goBack()'>Return</button>"].join('');

@@ -34,12 +34,17 @@ class SelectPickupFranchise {
     setTimeout(beginAutocorrect, 500);
 
     return `
-      <div>
-        <p>What's your address?</p>
-        <input type="text" id="address-input" />
-        <div id="address-autocomplete-list"></div>
+      <div class="raluce-ecommerce-plugin-container">
+          <h1 class="raluce-ecommerce-plugin-order-now-header">Order Now</h1>
+          <div class="raluce-ecommerce-plugin-card">
+            <button class="raluce-ecommerce-plugin-goBack-button" onclick="ralucePlugin.goBack()">Return</button>
+            <div>
+              <p>What's your address?</p>
+              <input type="text" id="address-input" autocomplete="off" />
+              <div id="address-autocomplete-list"></div>
+            </div>
+          </div>
       </div>
-      <button onclick="ralucePlugin.goBack()">Return</button>
     `;
   }
 }
