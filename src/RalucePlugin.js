@@ -16,6 +16,7 @@ class RalucePlugin {
     this.brand = null;
     this.franchise = null;
     this.address = null;
+    this.product = null;
 
     this.views = createViews(this);
     this.viewsHistory = [];
@@ -110,7 +111,11 @@ class RalucePlugin {
     this.goToCatalog(franchisesNearby[0].id, address);
   }
 
+  async goToProductOptions(product) {
+    this.product = product;
 
+    this.setView(this.views.productOptions);
+  }
 }
 
 export default RalucePlugin;

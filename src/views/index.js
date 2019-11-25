@@ -3,6 +3,7 @@ import SelectPickupFranchise from './SelectPickupFranchise';
 import SelectDeliveryAddress from './SelectDeliveryAddress';
 import NoDeliveryToZipcode from './NoDeliveryToZipcode';
 import Catalog from './Catalog';
+import ProductOptions from './ProductOptions';
 
 export function createViews(context) {
   return {
@@ -11,5 +12,6 @@ export function createViews(context) {
     selectDeliveryAddress: new SelectDeliveryAddress(context),
     noDeliveryToZipcode: new NoDeliveryToZipcode(context),
     catalog: new Catalog(context),
+    productOptions: new ProductOptions(context),
   }
 }

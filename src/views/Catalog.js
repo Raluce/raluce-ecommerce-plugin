@@ -17,7 +17,7 @@ class Catalog {
           <h3 class="raluce-ecommerce-category-name">${name}</h3>
           <div class="raluce-ecommerce-category-products-box">
             ${products.map(p => `
-              <div class="raluce-ecommerce-product-box">
+              <div class="raluce-ecommerce-product-box" onclick='ralucePlugin.goToProductOptions(${JSON.stringify(p)})'>
                 <div class="raluce-ecommerce-product-image" style="background-image:url('${p.image}');"></div>
                 <div class="raluce-ecommerce-text-box">
                   <p class="raluce-ecommerce-product-cost">$${PriceFormatter.format(p.price.cost)}</p>
