@@ -1,16 +1,53 @@
+@font-face {
+  font-family: sans-serif;
+  src: url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+}
+
+h1, h2, h3, h4, h5, p, button, span, i {
+  font-family: sans-serif;
+}
+
 #raluce-ecommerce-plugin-root {
   min-height: 350px;
   width: 100%;
   position: relative;
+  overflow: hidden;
+}
+.raluce-ecommerce-plugin-what-is-your-address-question {
+  margin-top: -80px;
+}
+.raluce-ecommerce-plugin-select-franchise-question {
+  margin-left: 10px;
 }
 #address-input {
   width: 95%;
+  height: 40px;
+  border-radius: 5px;
+  box-shadow: none;
+  border-radius: none;
+  font-size: 20px;
+  color: #888;
 }
 #address-autocomplete-list {
   position: absolute;
   width: 76%;
-  height: 70px;
+  height: 150px;
   overflow-y: scroll;
+}
+#address-autocomplete-list > button {
+  font-size: 16px;
+  width: 100%;
+  background: white;
+  color: #888;
+  border: none;
+  box-shadow: none;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid #aaa;
+}
+.raluce-ecommerce-plugin-franchise-list {
+  overflow: scroll;
+  padding: 0 15px 0 15px;
 }
 .raluce-ecommerce-plugin-picture-box {
   width: 100%;
@@ -56,7 +93,7 @@
   flex-direction: column;
   justify-content: space-around;
   transition: 0.3s;
-  overflow: scroll;
+  overflow: hidden;
   padding-bottom: 15px;
   position: relative;
 }
@@ -80,6 +117,7 @@
   width: 100%;
   height: 40px;
   transition: 0.3s;
+  font-size: 16px;
 }
 
 .raluce-ecommerce-button:hover {
@@ -98,7 +136,8 @@
   color: gray;
   position: absolute;
   top: 15px;
-  left: 0px;
+  right: 10px;
+  font-size: 14px;
 }
 
 .raluce-ecommerce-plugin-order-now-header {
@@ -112,6 +151,8 @@
 
 .raluce-ecommerce-category-box {
   margin-top: 100px;
+  margin-left: 65px;
+  width: calc(100% - 65px);
 }
 
 .raluce-ecommerce-category-products-box {
@@ -162,17 +203,17 @@
 
 .raluce-ecommerce-product-description {
   font-size: 12px;
-  margin: 0;
+  margin: 10px 0 0 0;
 }
 
 .raluce-ecommerce-product-cost {
   font-size: 18px;
-  height: 40px;
+  height: 18px;
   background: #f1f1f1;
   color: gray;
   margin: 0;
   position: absolute;
-  top: 0px;
+  top: 10px;
   right: 4px;
 }
 
@@ -215,5 +256,9 @@
     font-size: 3em;
     color: rgba(255,255,255,0.7);
     margin: auto;
+  }
+  .raluce-ecommerce-category-box {
+    margin-left: 15px;
+    width: calc(100% - 15px);
   }
 }
