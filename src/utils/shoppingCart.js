@@ -3,21 +3,28 @@ import { sha1 } from 'object-hash';
 const shoppingCartKey = 'raluce-ecommerce-plugin/shoopingCart';
 
 export function getShoppingCart() {
-  let shoopingCart = localStorage.getItem(shoppingCartKey);
+  let shoopingCart = sessionStorage.getItem(shoppingCartKey);
 
   return !shoopingCart ? [] : JSON.parse(shoopingCart);
 }
 
-export function addProduct(product) {
-  const hash = getProductHash(product);
-  const productDto = mapProductToProductOrderDTO(product);
+export function addProduct(product, quantity = 1) {
+  if (!product || quantity < 1) return;
 
-  addProductToStore({ ...productDto, hash });
+  const hash = getProductHash(product);
+  addProductToStore({ ...product, hash, quantity });
 }
 
-function addProductToStore(productDto) {
+function addProductToStore(product) {
   let shoppingCart = getShoppingCart();
-  shoppingCart.push(productDto);
+
+  const productIndex = shoppingCart.findIndex(x => x.hash === product.hash);
+
+  if (productIndex === -1) {
+    shoppingCart.push(product);
+  } else {
+    shoppingCart[productIndex].quantity += product.quantity;
+  }
 
   sessionStorage.setItem(shoppingCartKey, JSON.stringify(shoppingCart));
 }
@@ -26,9 +33,8 @@ export function removeProduct(hash) {
   let shoppingCart = getShoppingCart();
   shoopingCart = shoppingCart.filter(x => x.hash != hash);
 
-  localStorage.setItem(shoppingCartKey, JSON.stringify(shoppingCart));
+  sessionStorage.setItem(shoppingCartKey, JSON.stringify(shoppingCart));
 }
-
 
 function sortById(a, b) {
   if (a.id < b.id) return -1;

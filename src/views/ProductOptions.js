@@ -14,6 +14,7 @@ class ProductOptions {
         <h1>${product.name}</h1>
         <p>${product.description}</p>
         ${productOptions}
+        <button onclick="ralucePlugin.addToShoppingCart(3)">Add to shopping cart</button>
         <button onclick="ralucePlugin.goBack()">Return</button>
       </div>
     `;

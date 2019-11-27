@@ -1,5 +1,6 @@
 import Raluce from '@raluce/raluce';
 
+import * as shoppingCart from './utils/shoppingCart';
 import { OrderType, setOrderSession, getOrderSession, clear } from './utils/storage';
 import { createViews } from './views';
 
@@ -115,6 +116,11 @@ class RalucePlugin {
     this.product = product;
 
     this.setView(this.views.productOptions);
+  }
+
+  addToShoppingCart(quantity = 1) {
+    shoppingCart.addProduct(this.product, quantity);
+    this.goBack();
   }
 }
 
