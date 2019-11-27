@@ -1,4 +1,5 @@
 import { sha1 } from 'object-hash';
+import axios from 'axios';
 
 const shoppingCartKey = 'raluce-ecommerce-plugin/shoopingCart';
 
@@ -6,6 +7,19 @@ export function getShoppingCart() {
   let shoopingCart = sessionStorage.getItem(shoppingCartKey);
 
   return !shoopingCart ? [] : JSON.parse(shoopingCart);
+}
+
+export async function getPrice(franchiseId, orderType = 'pickup') {
+  const shoppingCart = getShoppingCart();
+  const products = shoppingCart.map(mapProductToProductOrderDTO);
+
+  try {
+    const { data } = await axios.post(`https://api.raluce.com/v1/franchises/${franchiseId}/orders/quote`, { products, orderType });
+
+    return data;
+  } catch (e) {
+    return null;
+  }
 }
 
 export function addProduct(product, quantity = 1) {
@@ -43,9 +57,10 @@ function sortById(a, b) {
   return 0;
 }
 
-function mapProductToProductOrderDTO({ id, options }) {
+function mapProductToProductOrderDTO({ id, options, quantity = 1 }) {
   return {
     id,
+    quantity,
     options: options.map(option => ({
       id: option.id,
       choices: option.choices.map(choice => ({ id: choice.id })).sort(sortById),

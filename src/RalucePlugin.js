@@ -73,6 +73,13 @@ class RalucePlugin {
       this.shoppingCartDialog.style.visibility = 'visible';
     }
 
+    // Calculate price of shopping cart on every update
+    if (this.franchise) {
+      shoppingCart.getPrice(this.franchise.id)
+      .then(price => console.log(price))
+      .catch(console.error);
+    }
+
     // Todo: Update list of products in shopping cart dialog
   }
 
