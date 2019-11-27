@@ -12,6 +12,7 @@ class RalucePlugin {
 
     this.raluce = new Raluce();
     this.contentDiv = null;
+    this.shoppingCartDialog = null;
 
     this.brandId = brandId;
     this.brand = null;
@@ -47,6 +48,7 @@ class RalucePlugin {
 
     if (banner && color) {
       rootDiv.innerHTML = `
+        <div class="shopping-cart-dialog" id="shopping-cart-dialog" style="background-color: ${color}; visibility: hidden;"></div>
         <div class="raluce-ecommerce-plugin-picture-box" style="background-image: url('${banner}');"></div>
         <div class="raluce-ecommerce-plugin-color-box" style="background-color: ${color};"></div>
       `;
@@ -57,6 +59,21 @@ class RalucePlugin {
 
     this.contentDiv = contentDiv;
     rootDiv.appendChild(contentDiv);
+
+    this.shoppingCartDialog = document.getElementById('shopping-cart-dialog');
+    this.updateShoppingCartDialog();
+  }
+
+  updateShoppingCartDialog() {
+    const cart = shoppingCart.getShoppingCart();
+    const shoppingCartSize = cart.length;
+
+    if (shoppingCartSize > 0) {
+      this.shoppingCartDialog.innerText = shoppingCartSize.toString();
+      this.shoppingCartDialog.style.visibility = 'visible';
+    }
+
+    // Todo: Update list of products in shopping cart dialog
   }
 
   setView(view) {
@@ -119,8 +136,10 @@ class RalucePlugin {
   }
 
   addToShoppingCart(quantity = 1) {
-    shoppingCart.addProduct(this.product, quantity);
     this.goBack();
+
+    shoppingCart.addProduct(this.product, quantity);
+    this.updateShoppingCartDialog();
   }
 }
 
