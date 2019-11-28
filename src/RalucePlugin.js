@@ -162,6 +162,8 @@ class RalucePlugin {
   }
 
   addToShoppingCart(quantity = 1) {
+    if (!this.isProductOptionsValid) return;
+
     this.goBack();
 
     let productDto = {
