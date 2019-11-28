@@ -50,6 +50,38 @@ export function removeProduct(hash) {
   sessionStorage.setItem(shoppingCartKey, JSON.stringify(shoppingCart));
 }
 
+export function isProductValid(product, selectedOptions) {
+  let isValid = true;
+
+  for (var option of product.options) {
+    if (!isOptionValid(option, selectedOptions[option.id])) return false;
+  }
+
+  return isValid;
+}
+
+export function isOptionValid(option, selectedOption) {
+  if (!selectedOption) return false;
+
+  const size = selectedOption.size;
+
+  return size >= option.min && size <= option.max;
+}
+
+export function mapSelectedOptionsToProductOptionsDto(selectedOptions) {
+  const optionIds = Object.keys(selectedOptions);
+  const options = [];
+
+  for (var optionId of optionIds) {
+    options.push({
+      id: optionId,
+      choices: Array.from(selectedOptions[optionId]).map(id => ({ id }))
+    });
+  }
+
+  return options;
+}
+
 function sortById(a, b) {
   if (a.id < b.id) return -1;
   if (a.id > b.id) return 1;

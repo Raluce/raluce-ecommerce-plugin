@@ -12,7 +12,8 @@ class ProductOptions {
   }
 
   async render() {
-    const { product } = this.context;
+    const { product, isProductOptionsValid } = this.context;
+    console.log(isProductOptionsValid);
     const self = this;
 
     const header = `
@@ -27,6 +28,7 @@ class ProductOptions {
         </div>
       </div>
     `;
+
     const body =  `
       <div>
         ${
@@ -40,7 +42,7 @@ class ProductOptions {
                   const choiceId = choice.id;
                   let activeClass = self.isChoiceSelected(optionId, choiceId) ? 'active' : '';
 
-                  return `<button class="raluce-ecommerce-product-options-choice-button ${activeClass}" onclick="ralucePlugin.handleSelectProductChoice('${optionId}', '${choiceId}')">${choice.name}</button>`;
+                  return `<button class="raluce-ecommerce-product-options-choice-button ${activeClass}" onclick='ralucePlugin.handleSelectProductChoice("${optionId}", "${choiceId}", ${JSON.stringify(option)})'>${choice.name}</button>`;
                 }).join('')}
               </div>
             </div>
@@ -49,7 +51,7 @@ class ProductOptions {
         <div class="raluce-ecommerce-plugin-product-card marginTop15">
               <div class="padding15">
                 <center>
-                  <button onclick="ralucePlugin.addToShoppingCart(3)" class="raluce-ecommerce-product-options-choice-button raluce-ecommerce-active-button">Add to shopping cart</button>
+                  <button class="raluce-ecommerce-product-options-choice-button ${isProductOptionsValid ? 'raluce-ecommerce-active-button' : ''}" ${!isProductOptionsValid ? 'disabled' : ''} onclick="ralucePlugin.addToShoppingCart()">Add to shopping cart</button>
                 </center>
               </div>
             </div>

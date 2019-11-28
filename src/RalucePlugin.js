@@ -23,6 +23,7 @@ class RalucePlugin {
     this.address = null;
     this.product = null;
     this.selectedOptions = {};
+    this.isProductOptionsValid = false;
 
     this.views = createViews(this);
     this.viewsHistory = [];
@@ -155,6 +156,7 @@ class RalucePlugin {
   async goToProductOptions(product) {
     this.product = product;
     this.selectedOptions = {};
+    this.isProductOptionsValid = shoppingCart.isProductValid(this.product, this.selectedOptions); // some products may be valid to start off
 
     this.setView(this.views.productOptions);
   }
@@ -162,23 +164,32 @@ class RalucePlugin {
   addToShoppingCart(quantity = 1) {
     this.goBack();
 
-    shoppingCart.addProduct(this.product, quantity);
+    let productDto = {
+      id: this.product.id,
+      options: shoppingCart.mapSelectedOptionsToProductOptionsDto(this.selectedOptions),
+    };
+
+    shoppingCart.addProduct(productDto, quantity);
     this.updateShoppingCartDialog();
   }
 
-  handleSelectProductChoice(optionId, choiceId) {
+  handleSelectProductChoice(optionId, choiceId, productOption) {
     const option = this.selectedOptions[optionId];
-
     if (!option)
     {
       this.selectedOptions[optionId] = new Set([choiceId]);
     } else {
       if (option.has(choiceId)) {
         option.delete(choiceId);
-      } else {
+      } else if (productOption.max === 1) {
+        option.clear();
+        option.add(choiceId);
+      } else if (productOption.max > option.size) {
         option.add(choiceId);
       }
     }
+
+    this.isProductOptionsValid = shoppingCart.isProductValid(this.product, this.selectedOptions);
 
     // Refresh view with new data
     this.setView(this.views.productOptions, true);
