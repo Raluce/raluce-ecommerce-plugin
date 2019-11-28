@@ -3,15 +3,22 @@
   src: url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 }
 
-h1, h2, h3, h4, h5, p, button, span, i {
+h1, h2, h3, h4, h5, p, button, span, i, .shopping-cart-dialog {
   font-family: sans-serif;
 }
 
 #raluce-ecommerce-plugin-root {
   min-height: 350px;
   width: 100%;
+}
+#raluce-ecommerce-plugin-header {
+  width: 100%;
+  height: 350px;
   position: relative;
   overflow: hidden;
+}
+#raluce-ecommerce-plugin-body {
+  width: 100%;
 }
 .raluce-ecommerce-plugin-what-is-your-address-question {
   margin-top: -80px;
@@ -241,6 +248,87 @@ h1, h2, h3, h4, h5, p, button, span, i {
 
 .shopping-cart-dialog:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.raluce-ecommerce-plugin-product-card {
+  background: rgb(255, 255, 255);
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  margin: auto;
+  width: 90%;
+  min-width: 220px;
+  height: 82%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: 0.3s;
+  overflow: hidden;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+.raluce-ecommerce-plugin-max-size-card {
+  max-width: 500px;
+}
+.raluce-ecommerce-product-options-product-info-name {
+  margin: 0;
+}
+.raluce-ecommerce-product-options-product-info-description {
+  margin: 0;
+}
+.raluce-ecommerce-product-options-product-price {
+  color: rgb(74, 144, 226);
+  margin: 5px 0 0 0;
+}
+
+
+
+.raluce-ecommerce-product-options-image {
+  width: 100% !important;
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.raluce-ecommerce-product-options-info {
+  padding: 15px;
+}
+
+.raluce-ecommerce-product-options-choice-button {
+  color: rgb(171, 171, 171);
+  background-color: rgb(212, 212, 212);
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-block;
+  min-height: 1em;
+  outline: 0;
+  border: none;
+  vertical-align: baseline;
+  margin-top: 5px;
+  padding: .78571429em 1.5em .78571429em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 500;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: .28571429rem;
+  align-items: stretch;
+}
+
+.raluce-ecommerce-active-button {
+  background: rgb(74, 144, 226);
+  color: white;
+}
+
+.marginTop15 {
+  margin-top: 15px;
+}
+
+.padding15 {
+  padding: 15px;
 }
 
 @media screen and (max-device-width: 800px) {

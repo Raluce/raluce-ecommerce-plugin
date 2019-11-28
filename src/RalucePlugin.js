@@ -14,6 +14,9 @@ class RalucePlugin {
     this.contentDiv = null;
     this.shoppingCartDialog = null;
 
+    this.headerDiv = null;
+    this.bodyDiv = null;
+
     this.brandId = brandId;
     this.brand = null;
     this.franchise = null;
@@ -49,16 +52,21 @@ class RalucePlugin {
     if (banner && color) {
       rootDiv.innerHTML = `
         <div class="shopping-cart-dialog" id="shopping-cart-dialog" style="background-color: ${color}; visibility: hidden;"></div>
-        <div class="raluce-ecommerce-plugin-picture-box" style="background-image: url('${banner}');"></div>
-        <div class="raluce-ecommerce-plugin-color-box" style="background-color: ${color};"></div>
+        <div id="raluce-ecommerce-plugin-header">
+          <div class="raluce-ecommerce-plugin-picture-box" style="background-image: url('${banner}');"></div>
+          <div class="raluce-ecommerce-plugin-color-box" style="background-color: ${color};"></div>
+        </div>
+        <div id="raluce-ecommerce-plugin-body"></div>
       `;
     }
 
     const contentDiv = document.createElement('div');
     contentDiv.className = 'raluce-ecommerce-plugin-content';
 
+    this.headerDiv = document.getElementById('raluce-ecommerce-plugin-header');
+    this.bodyDiv = document.getElementById('raluce-ecommerce-plugin-body');
     this.contentDiv = contentDiv;
-    rootDiv.appendChild(contentDiv);
+    this.headerDiv.appendChild(contentDiv);
 
     this.shoppingCartDialog = document.getElementById('shopping-cart-dialog');
     this.updateShoppingCartDialog();
@@ -91,8 +99,14 @@ class RalucePlugin {
       } else {
         self.viewsHistory.push(view.name);
       }
+      this.bodyDiv.innerHTML = '';
+      if (view.name !== 'catalog' && view.name !== 'productOptions') {
+        self.contentDiv.innerHTML = html;
+      } else {
+        self.contentDiv.innerHTML = html.header;
+        self.bodyDiv.innerHTML = html.body;
+      }
 
-      self.contentDiv.innerHTML = html;
     }).catch(console.error);
   }
 

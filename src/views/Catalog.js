@@ -7,11 +7,17 @@ class Catalog {
   }
 
   async render() {
-    const { catalog } = this.context.franchise;
+    const { franchise } = this.context;
+    const { catalog } = franchise;
 
-    return [...catalog.categories.map(category => {
+    const header = `
+      <button onclick='ralucePlugin.goBack()'>Return</button>
+      <h1 class="raluce-ecommerce-plugin-order-now-header">Ordering from: ${franchise.address.city}</h1>
+    `
+
+    const body = catalog.categories.map(category => {
+
       const { name, products } = category;
-
       return `
         <div class="raluce-ecommerce-category-box">
           <h3 class="raluce-ecommerce-category-name">${name}</h3>
@@ -29,7 +35,9 @@ class Catalog {
           </div>
         </div>
       `;
-    }), "<button onclick='ralucePlugin.goBack()'>Return</button>"].join('');
+    });
+
+    return {header, body: body.join('')}
   }
 }
 
