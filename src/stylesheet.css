@@ -318,6 +318,10 @@ h1, h2, h3, h4, h5, p, button, span, i, .shopping-cart-dialog {
   align-items: stretch;
 }
 
+.active {
+  background: rgb(74, 144, 226);
+}
+
 .raluce-ecommerce-active-button {
   background: rgb(74, 144, 226);
   color: white;

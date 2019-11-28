@@ -4,8 +4,16 @@ class ProductOptions {
     this.context = context;
   }
 
+  isChoiceSelected(optionId, choiceId) {
+    const option = this.context.selectedOptions[optionId];
+    if (!option) return false;
+
+    return option.has(choiceId);
+  }
+
   async render() {
     const { product } = this.context;
+    const self = this;
 
     const header = `
       <button onclick="ralucePlugin.goBack()">Return</button>
@@ -27,9 +35,13 @@ class ProductOptions {
               <div class="padding15">
                 <h3>${option.name}<h3>
                 <hr/>
-                ${option.choices.map(choice => `
-                  <button class="raluce-ecommerce-product-options-choice-button">${choice.name}</button>
-                `).join('')}
+                ${option.choices.map(choice => {
+                  const optionId = option.id;
+                  const choiceId = choice.id;
+                  let activeClass = self.isChoiceSelected(optionId, choiceId) ? 'active' : '';
+
+                  return `<button class="raluce-ecommerce-product-options-choice-button ${activeClass}" onclick="ralucePlugin.handleSelectProductChoice('${optionId}', '${choiceId}')">${choice.name}</button>`;
+                }).join('')}
               </div>
             </div>
           `).join('')

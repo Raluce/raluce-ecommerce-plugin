@@ -22,6 +22,7 @@ class RalucePlugin {
     this.franchise = null;
     this.address = null;
     this.product = null;
+    this.selectedOptions = {};
 
     this.views = createViews(this);
     this.viewsHistory = [];
@@ -91,14 +92,15 @@ class RalucePlugin {
     // Todo: Update list of products in shopping cart dialog
   }
 
-  setView(view) {
+  setView(view, refresh = false) {
     const self = this;
     view.render().then(html => {
       if (view.name === 'home') {
         clear(); // Resets session
-      } else {
+      } else if (!refresh) {
         self.viewsHistory.push(view.name);
       }
+
       this.bodyDiv.innerHTML = '';
       if (view.name !== 'catalog' && view.name !== 'productOptions') {
         self.contentDiv.innerHTML = html;
@@ -152,6 +154,7 @@ class RalucePlugin {
 
   async goToProductOptions(product) {
     this.product = product;
+    this.selectedOptions = {};
 
     this.setView(this.views.productOptions);
   }
@@ -161,6 +164,24 @@ class RalucePlugin {
 
     shoppingCart.addProduct(this.product, quantity);
     this.updateShoppingCartDialog();
+  }
+
+  handleSelectProductChoice(optionId, choiceId) {
+    const option = this.selectedOptions[optionId];
+
+    if (!option)
+    {
+      this.selectedOptions[optionId] = new Set([choiceId]);
+    } else {
+      if (option.has(choiceId)) {
+        option.delete(choiceId);
+      } else {
+        option.add(choiceId);
+      }
+    }
+
+    // Refresh view with new data
+    this.setView(this.views.productOptions, true);
   }
 }
 
