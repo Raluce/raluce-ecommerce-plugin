@@ -6,7 +6,7 @@ class SelectPickupFranchise {
 
   mapFranchiseToButton(franchise, color) {
     return `
-      <button class="raluce-ecommerce-button" style="background-color: ${color};" onclick="ralucePlugin.goToCatalog('${franchise.id}')">
+      <button class="raluce-ecommerce-button" style="background-color: ${color || '#5252dd'};" onclick="ralucePlugin.goToCatalog('${franchise.id}')">
         ${franchise.address.line1}, ${franchise.address.city}, ${franchise.address.state} ${franchise.address.zipcode}
       </button>
     `

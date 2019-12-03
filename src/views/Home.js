@@ -15,8 +15,8 @@ class Home {
           <div class="raluce-ecommerce-plugin-card">
             <div>
               <p>How should we take your order?</p>
-              <button class="raluce-ecommerce-button" style="background-color: ${brand.color};" onclick="ralucePlugin.navigateTo('${deliveryViewName}')">Delivery</button>
-              <button class="raluce-ecommerce-button" style="background-color: ${brand.color};" onclick="ralucePlugin.navigateTo('${pickupViewName}')">Pickup</button>
+              <button class="raluce-ecommerce-button" style="background-color: ${brand.color || '#5252dd'};" onclick="ralucePlugin.navigateTo('${deliveryViewName}')">Delivery</button>
+              <button class="raluce-ecommerce-button" style="background-color: ${brand.color || '#5252dd'};" onclick="ralucePlugin.navigateTo('${pickupViewName}')">Pickup</button>
             </div>
           </div>
       </div>

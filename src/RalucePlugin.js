@@ -59,7 +59,7 @@ class RalucePlugin {
         <div id="raluce-ecommerce-plugin-shopping-cart-modal"></div>
         <div id="raluce-ecommerce-plugin-header">
           <div class="raluce-ecommerce-plugin-picture-box" style="background-image: url('${banner}');"></div>
-          <div class="raluce-ecommerce-plugin-color-box" style="background-color: ${color};"></div>
+          <div class="raluce-ecommerce-plugin-color-box" style="background-color: ${color || '#5252dd'};"></div>
         </div>
         <div id="raluce-ecommerce-plugin-body"></div>
       `;
@@ -100,7 +100,7 @@ class RalucePlugin {
   toggleShopingCart() {
     const cart = shoppingCart.getShoppingCart();
     this.shoppingCartModal.innerHTML = `
-      <div class="raluce-ecommerce-plugin-shopping-cart-header" style="background-color:${this.brand.color}">
+      <div class="raluce-ecommerce-plugin-shopping-cart-header" style="background-color:${this.brand.color || '#5252dd'}">
         <h5>Shopping Cart</h5>
         <button onclick="ralucePlugin.toggleShopingCart()">return</button>
       </div>
