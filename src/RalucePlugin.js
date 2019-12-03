@@ -4,6 +4,7 @@ import * as shoppingCart from './utils/shoppingCart';
 import { OrderType, setOrderSession, getOrderSession, clear } from './utils/storage';
 import { createViews } from './views';
 
+const PriceFormatter = new Intl.NumberFormat({ style: 'currency', currency: 'USD' });
 const rootDiv = document.getElementById('raluce-ecommerce-plugin-root');
 
 class RalucePlugin {
@@ -13,6 +14,7 @@ class RalucePlugin {
     this.raluce = new Raluce();
     this.contentDiv = null;
     this.shoppingCartDialog = null;
+    this.shoppingCartModal = null;
 
     this.headerDiv = null;
     this.bodyDiv = null;
@@ -53,7 +55,8 @@ class RalucePlugin {
 
     if (banner && color) {
       rootDiv.innerHTML = `
-        <div class="shopping-cart-dialog" id="shopping-cart-dialog" style="background-color: ${color}; visibility: hidden;"></div>
+        <div onclick="ralucePlugin.toggleShopingCart()" class="shopping-cart-dialog" id="shopping-cart-dialog" style="background-color: ${color}; visibility: hidden;"></div>
+        <div id="raluce-ecommerce-plugin-shopping-cart-modal"></div>
         <div id="raluce-ecommerce-plugin-header">
           <div class="raluce-ecommerce-plugin-picture-box" style="background-image: url('${banner}');"></div>
           <div class="raluce-ecommerce-plugin-color-box" style="background-color: ${color};"></div>
@@ -71,6 +74,7 @@ class RalucePlugin {
     this.headerDiv.appendChild(contentDiv);
 
     this.shoppingCartDialog = document.getElementById('shopping-cart-dialog');
+    this.shoppingCartModal = document.getElementById('raluce-ecommerce-plugin-shopping-cart-modal');
     this.updateShoppingCartDialog();
   }
 
@@ -91,6 +95,30 @@ class RalucePlugin {
     }
 
     // Todo: Update list of products in shopping cart dialog
+  }
+
+  toggleShopingCart() {
+    const cart = shoppingCart.getShoppingCart();
+    console.log(cart);
+    this.shoppingCartModal.innerHTML = `
+      <div class="raluce-ecommerce-plugin-shopping-cart-header" style="background-color:${this.brand.color}">
+        <h5>Shopping Cart</h5>
+        <button onclick="ralucePlugin.toggleShopingCart()">return</button>
+      </div>
+      <center class="raluce-ecommerce-plugin-shopping-cart-products">
+      ${
+        cart.map(p => {
+          return `
+            <div class="raluce-ecommerce-shopping-cart-product-box">
+              <p class="raluce-ecommerce-shopping-cart-product-name">${p.quantity}x ${p.name}</p>
+              <p class="raluce-ecommerce-shopping-cart-product-price">$${p.price.cost}</p>
+            </div>
+          `
+        }).join('')
+      }
+      </center>
+      <button class="raluce-ecommerce-plugin-shopping-cart-pay-button">Pay</button>
+    `
   }
 
   setView(view, refresh = false) {
@@ -168,6 +196,8 @@ class RalucePlugin {
 
     let productDto = {
       id: this.product.id,
+      name: this.product.name,
+      price: this.product.price,
       options: shoppingCart.mapSelectedOptionsToProductOptionsDto(this.selectedOptions),
     };
 

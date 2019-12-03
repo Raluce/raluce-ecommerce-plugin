@@ -13,7 +13,6 @@ class ProductOptions {
 
   async render() {
     const { product, isProductOptionsValid } = this.context;
-    console.log(isProductOptionsValid);
     const self = this;
 
     const header = `
@@ -35,7 +34,8 @@ class ProductOptions {
           product.options.map(option => `
             <div class="raluce-ecommerce-plugin-product-card marginTop15">
               <div class="padding15">
-                <h3>${option.name}<h3>
+                <h3 class="raluce-ecommerce-option-name">${option.name}</h3>
+                <p class="raluce-ecommerce-option-instructions">${option.isRequired ? '(required)' : ''} Please select ${option.max} choices</p>
                 <hr/>
                 ${option.choices.map(choice => {
                   const optionId = option.id;
