@@ -99,7 +99,6 @@ class RalucePlugin {
 
   toggleShopingCart() {
     const cart = shoppingCart.getShoppingCart();
-    console.log(cart);
     this.shoppingCartModal.innerHTML = `
       <div class="raluce-ecommerce-plugin-shopping-cart-header" style="background-color:${this.brand.color}">
         <h5>Shopping Cart</h5>
@@ -117,7 +116,7 @@ class RalucePlugin {
         }).join('')
       }
       </center>
-      <button class="raluce-ecommerce-plugin-shopping-cart-pay-button">Pay</button>
+      <button class="raluce-ecommerce-plugin-shopping-cart-pay-button">Checkout</button>
     `
   }
 

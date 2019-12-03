@@ -170,14 +170,14 @@ h1, h2, h3, h4, h5, p, button, span, i, .shopping-cart-dialog {
 
 .raluce-ecommerce-shopping-cart-product-box {
   height: 50px;
-  width: 29%;
+  width: calc(100% - 70px);
   min-width: 330px;
   background: #f1f1f1;
   border: 2px solid #f1f1f1;
   box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
   border-radius: 5px;
   margin-top: 20px;
-  margin-right: 20px;
+  margin-left: 0px;
   overflow: hidden;
   display: flex;
   cursor: pointer;
@@ -443,6 +443,17 @@ h1, h2, h3, h4, h5, p, button, span, i, .shopping-cart-dialog {
   margin: auto;
 }
 
+.raluce-ecommerce-plugin-shopping-cart-header > button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  color: white;
+  cursor: pointer;
+}
+
 @media screen and (max-device-width: 800px) {
   .raluce-ecommerce-plugin-container {
     flex-direction: column;
@@ -460,5 +471,13 @@ h1, h2, h3, h4, h5, p, button, span, i, .shopping-cart-dialog {
   .raluce-ecommerce-category-box {
     margin-left: 15px;
     width: calc(100% - 15px);
+  }
+  #raluce-ecommerce-plugin-shopping-cart-modal {
+    width: 100%;
+    height: 100vh;
+    right: 0;
+    bottom:0;
+    border: none;
+    border-radius: 0;
   }
 }
