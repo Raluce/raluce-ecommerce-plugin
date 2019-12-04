@@ -252,12 +252,16 @@ class RalucePlugin {
     const { orderType } = getOrderSession();
     const products = shoppingCart.getShoppingCart();
 
+    const windowReference = window.open();
+
     this.raluce.createShoppingCart({
       type: orderType || 'pickup',
       franchiseId: this.franchise.id,
       products,
     })
-    .then(({ id }) => window.open(`https://stores.raluce.com/franchises/${this.franchise.id}/order?shoppingCartId=${id}`))
+    .then(({ id }) => {
+      windowReference.location = `https://stores.raluce.com/franchises/${this.franchise.id}/order?shoppingCartId=${id}`;
+    })
     .catch(console.error);
   }
 }
