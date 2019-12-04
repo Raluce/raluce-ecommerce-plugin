@@ -1,0 +1,559 @@
+@font-face {
+  font-family: sans-serif;
+  src: url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+}
+
+h1, h2, h3, h4, h5, p, button, span, i, .shopping-cart-dialog {
+  font-family: sans-serif;
+}
+
+#raluce-ecommerce-plugin-root {
+  min-height: 350px;
+  width: 100%;
+}
+#raluce-ecommerce-plugin-header {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  overflow: hidden;
+}
+#raluce-ecommerce-plugin-body {
+  width: 100%;
+}
+.raluce-ecommerce-plugin-what-is-your-address-question {
+  margin-top: -80px;
+}
+.raluce-ecommerce-plugin-select-franchise-question {
+  margin-left: 10px;
+  margin-top: 22px;
+}
+#address-input {
+  width: 95%;
+  height: 40px;
+  border-radius: 5px;
+  box-shadow: none;
+  border-radius: none;
+  font-size: 20px;
+  color: #888;
+}
+#address-autocomplete-list {
+  position: absolute;
+  width: 76%;
+  height: 150px;
+  overflow-y: scroll;
+}
+#address-autocomplete-list > button {
+  font-size: 16px;
+  width: 100%;
+  background: white;
+  color: #888;
+  border: none;
+  box-shadow: none;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid #aaa;
+}
+.raluce-ecommerce-plugin-franchise-list {
+  overflow: scroll;
+  padding: 0 15px 0 15px;
+}
+.raluce-ecommerce-plugin-picture-box {
+  width: 100%;
+  min-height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  -webkit-filter: blur(4px);
+  -moz-filter: blur(4px);
+  -o-filter: blur(4px);
+  -ms-filter: blur(4px);
+  filter: blur(4px);
+}
+.raluce-ecommerce-plugin-color-box {
+  opacity: 0.3;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+}
+.raluce-ecommerce-plugin-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.raluce-ecommerce-plugin-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.raluce-ecommerce-plugin-card {
+  background: rgb(255, 255, 255);
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  margin: auto;
+  width: 30%;
+  min-width: 220px;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: 0.3s;
+  overflow: hidden;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+.raluce-ecommerce-plugin-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.raluce-ecommerce-plugin-card > div {
+  margin: auto;
+  width: 80%;
+}
+
+.raluce-ecommerce-button {
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  transition: 0.3s;
+  font-size: 16px;
+}
+
+.raluce-ecommerce-button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  filter: brightness(120%);
+}
+
+.raluce-ecommerce-button:focus {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  filter: brightness(80%);
+}
+
+.raluce-ecommerce-plugin-goBack-button {
+  background: transparent;
+  border: none;
+  color: gray;
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  font-size: 14px;
+
+
+  width: 20px;
+  height: 20px;
+  background: url('./icons/carot-black.svg');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  transform: rotate(-90deg);
+  cursor: pointer;
+  font-size: 14px;
+
+  position: absolute;
+  right: 20px;
+  top: 20px;
+
+
+}
+
+.raluce-ecommerce-plugin-order-now-header {
+  font-size: 100px;
+  font-weight: bold;
+  color: rgba(255,255,255,0.7);
+
+  margin: auto;
+}
+
+
+.raluce-ecommerce-category-box {
+  margin-top: 100px;
+  margin-left: 65px;
+  width: calc(100% - 65px);
+}
+
+.raluce-ecommerce-category-products-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.raluce-ecommerce-shopping-cart-product-box {
+  height: 50px;
+  width: calc(100% - 70px);
+  min-width: 330px;
+  background: #f1f1f1;
+  border: 2px solid #f1f1f1;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: 0px;
+  overflow: hidden;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+  padding-left: 15px;
+  padding-top: 12px;
+}
+
+.raluce-ecommerce-product-box {
+  height: 100px;
+  width: 29%;
+  min-width: 330px;
+  background: #f1f1f1;
+  border: 2px solid #f1f1f1;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-right: 20px;
+  overflow: hidden;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+}
+
+.raluce-ecommerce-product-box:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.raluce-ecommerce-product-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 25%;
+}
+
+.raluce-ecommerce-text-box {
+  width: 75%;
+  padding-top: 10px;
+  padding-left: 15px;
+}
+
+.raluce-ecommerce-product-name {
+  font-size: 18px;
+  margin: 0;
+}
+
+.raluce-ecommerce-product-description {
+  font-size: 12px;
+  margin: 10px 0 0 0;
+}
+
+.raluce-ecommerce-product-cost {
+  font-size: 18px;
+  height: 18px;
+  background: #f1f1f1;
+  color: gray;
+  margin: 0;
+  position: absolute;
+  top: 10px;
+  right: 4px;
+}
+
+.shopping-cart-dialog {
+  position: fixed;
+  z-index: 3;
+
+  right: 0;
+  bottom: 0;
+
+  width: 80px;
+  height: 80px;
+  margin: 15px;
+
+  text-align: center;
+  vertical-align: middle;
+  line-height: 80px;
+
+  border-radius: 100%;
+  color: white;
+
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+
+  background: url('./icons/shopping-cart.svg');
+  background-size: 50px 60px;
+  background-repeat: no-repeat;
+  background-position-x: 10px;
+  background-position-y: 16px;
+  cursor: pointer;
+  font-size: 14px;
+
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.raluce-ecommerce-plugin-shopping-cart-dismiss {
+  width: 20px;
+  height: 20px;
+  background: url('./icons/carot.svg');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  transform: rotate(180deg);
+  cursor: pointer;
+  font-size: 14px;
+
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.shopping-cart-dialog:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.raluce-ecommerce-plugin-product-card {
+  background: rgb(255, 255, 255);
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  margin: auto;
+  width: 90%;
+  min-width: 220px;
+  height: 82%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: 0.3s;
+  overflow: hidden;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+.raluce-ecommerce-plugin-max-size-card {
+  max-width: 500px;
+}
+.raluce-ecommerce-product-options-product-info-name {
+  margin: 0;
+  font-size: 24px;
+  align-self: center;
+  display: block;
+}
+.raluce-ecommerce-product-options-product-info-description {
+  margin: 0;
+}
+.raluce-ecommerce-product-options-product-price {
+  color: rgb(74, 144, 226);
+  margin: 5px 0 0 0;
+}
+.raluce-ecommerce-option-name {
+  font-size: 18px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.raluce-ecommerce-option-instructions {
+  color: gray;
+  font-weight: normal;
+  font-size: 16px;
+  margin: 0;
+}
+
+
+
+.raluce-ecommerce-product-options-image {
+  width: 100% !important;
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.raluce-ecommerce-product-options-info {
+  padding: 15px;
+}
+
+.raluce-ecommerce-product-options-choice-button {
+  color: rgb(171, 171, 171);
+  background-color: rgb(212, 212, 212);
+  font-size: 1rem;
+  cursor: pointer;
+  display: inline-block;
+  min-height: 1em;
+  outline: 0;
+  border: none;
+  vertical-align: baseline;
+  margin-top: 5px;
+  padding: .78571429em 1.5em .78571429em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 500;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: .28571429rem;
+  align-items: stretch;
+}
+
+.active {
+  background: rgb(74, 144, 226);
+  color: white;
+}
+
+.raluce-ecommerce-active-button {
+  background: rgb(74, 144, 226);
+  color: white;
+}
+
+.marginTop15 {
+  margin-top: 15px;
+}
+
+.padding15 {
+  padding: 15px;
+}
+
+.width100 {
+  width: calc(100% - 15px);
+}
+
+.raluce-ecommerce-catalog-logo {
+  width: 100px;
+  border-radius: 5px;
+}
+
+
+#raluce-ecommerce-plugin-shopping-cart-modal {
+  width: 93%;
+  max-width: 400px;
+  /* height: calc(100vh - 60px); */
+  height: 90vh;
+  position: fixed;
+  right: 100px;
+  bottom: 45px;
+  background: white;
+  z-index: 99;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.raluce-ecommerce-shopping-cart-delete-product {
+  background: none;
+  border: 0;
+  font-size: 28px;
+  transform: rotate(45deg);
+  position: absolute;
+  right: 5px;
+  top: 2px;
+  color: #a22c2b;
+  cursor: pointer;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 28px;
+  height: 32px;
+}
+
+.raluce-ecommerce-shopping-cart-product-price {
+  position: absolute;
+  right: 40px;
+}
+
+#raluce-ecommerce-plugin-shopping-cart-modal:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.raluce-ecommerce-plugin-shopping-cart-products {
+  width: 100%;
+  height: calc(100% - 120px);
+  overflow: scroll;
+}
+
+.raluce-ecommerce-plugin-shopping-cart-pay-button {
+  background: rgb(74, 144, 226);
+  color: white;
+  font-size: 1rem;
+  display: inline-block;
+  min-height: 1em;
+  outline: 0;
+  border: none;
+  vertical-align: baseline;
+  margin-top: 5px;
+  padding: .78571429em 1.5em .78571429em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 500;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  align-items: stretch;
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  bottom: 0px;
+  cursor: pointer;
+  z-index: 3;
+  left: 0;
+}
+
+
+.raluce-ecommerce-plugin-shopping-cart-header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.raluce-ecommerce-plugin-shopping-cart-header > h5 {
+  color: white;
+  font-size: 1.5em;
+  margin: auto;
+}
+
+.raluce-ecommerce-plugin-shopping-cart-header > button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+@media screen and (max-device-width: 800px) {
+  .raluce-ecommerce-plugin-container {
+    flex-direction: column;
+  }
+
+  .raluce-ecommerce-plugin-card {
+    width: 90%;
+  }
+
+  .raluce-ecommerce-plugin-order-now-header {
+    font-size: 3em;
+    color: rgba(255,255,255,0.7);
+    margin: auto;
+  }
+  .raluce-ecommerce-category-box {
+    margin-left: 15px;
+    width: calc(100% - 15px);
+  }
+  #raluce-ecommerce-plugin-shopping-cart-modal {
+    width: 100%;
+    height: 100vh;
+    right: 0;
+    bottom:0;
+    border: none;
+    border-radius: 0;
+  }
+}
