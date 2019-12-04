@@ -26,11 +26,9 @@ class Catalog {
         <center>
           <img class="raluce-ecommerce-catalog-logo" src="${brand.logo}" />
           <div class="raluce-ecommerce-product-options-info">
-            <h4 class="raluce-ecommerce-product-options-product-info-name">${brand.name}</h4>
+            <p class="raluce-ecommerce-product-options-product-info-name">${brand.name}</p>
             <br/>
-            <p class="raluce-ecommerce-product-options-product-info-description">${franchise.address.line1}</p>
-            <p class="raluce-ecommerce-product-options-product-info-description">${franchise.address.city}, ${franchise.address.state}</p>
-            <p class="raluce-ecommerce-product-options-product-info-description">${franchise.address.zipcode}</p>
+            <p class="raluce-ecommerce-product-options-product-info-description">${franchise.address.line1}. ${franchise.address.city}, ${franchise.address.state}. ${franchise.address.zipcode}</p>
             <br/>
             <p class="raluce-ecommerce-product-options-product-info-description">Phone: ${formatPhoneNumber(franchise.phone)}</p>
           </div>
