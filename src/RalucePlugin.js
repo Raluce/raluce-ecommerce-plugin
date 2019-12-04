@@ -1,4 +1,5 @@
 import Raluce from '@raluce/raluce';
+import axios from 'axios';
 
 import * as shoppingCart from './utils/shoppingCart';
 import { OrderType, setOrderSession, getOrderSession, clear } from './utils/storage';
@@ -116,7 +117,7 @@ class RalucePlugin {
         }).join('')
       }
       </center>
-      <button class="raluce-ecommerce-plugin-shopping-cart-pay-button">Checkout</button>
+      <button class="raluce-ecommerce-plugin-shopping-cart-pay-button" onclick="ralucePlugin.checkout()">Checkout</button>
     `
   }
 
@@ -224,6 +225,19 @@ class RalucePlugin {
 
     // Refresh view with new data
     this.setView(this.views.productOptions, true);
+  }
+
+  checkout() {
+    const { orderType } = getOrderSession();
+    const products = shoppingCart.getShoppingCart();
+
+    this.raluce.createShoppingCart({
+      type: orderType || 'pickup',
+      franchiseId: this.franchise.id,
+      products,
+    })
+    .then(({ id }) => console.log(`Shopping cart id: ${id}`))
+    .catch(console.error);
   }
 }
 
