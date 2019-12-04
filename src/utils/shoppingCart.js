@@ -45,7 +45,7 @@ function addProductToStore(product) {
 
 export function removeProduct(hash) {
   let shoppingCart = getShoppingCart();
-  shoopingCart = shoppingCart.filter(x => x.hash != hash);
+  shoppingCart = shoppingCart.filter(x => x.hash != hash);
 
   sessionStorage.setItem(shoppingCartKey, JSON.stringify(shoppingCart));
 }

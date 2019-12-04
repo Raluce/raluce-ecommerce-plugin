@@ -21,8 +21,8 @@ class SelectPickupFranchise {
       <div class="raluce-ecommerce-plugin-container">
           <h1 class="raluce-ecommerce-plugin-order-now-header">Order Now</h1>
           <div class="raluce-ecommerce-plugin-card">
-            <button class="raluce-ecommerce-plugin-goBack-button" onclick="ralucePlugin.goBack()">Return</button>
-            <p class="raluce-ecommerce-plugin-select-franchise-question">Select franchise</p>
+            <button class="raluce-ecommerce-plugin-goBack-button" onclick="ralucePlugin.goBack()"></button>
+            <center><p class="raluce-ecommerce-plugin-select-franchise-question">Select franchise</p></center>
             <div class="raluce-ecommerce-plugin-franchise-list">
               ${franchiseButtonlist}
             </div>

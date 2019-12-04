@@ -12,14 +12,13 @@ class ProductOptions {
   }
 
   async render() {
-    const { product, isProductOptionsValid } = this.context;
+    const { product, isProductOptionsValid, brand } = this.context;
     const self = this;
 
     const header = `
-      <button onclick="ralucePlugin.goBack()">Return</button>
       <div class="raluce-ecommerce-plugin-product-card raluce-ecommerce-plugin-max-size-card marginTop15">
-
-        <div class="raluce-ecommerce-product-options-image" style="background-image:url('${product.image}');"></div>
+        <button class="raluce-ecommerce-plugin-goBack-button" onclick="ralucePlugin.goBack()"></button>
+        <div class="raluce-ecommerce-product-options-image" style="background-image:url('${product.image || brand.logo}');"></div>
         <div class="raluce-ecommerce-product-options-info">
           <h4 class="raluce-ecommerce-product-options-product-info-name">${product.name}</h4>
           <p class="raluce-ecommerce-product-options-product-price">$${product.price.cost}</p>

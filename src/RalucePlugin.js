@@ -19,6 +19,7 @@ class RalucePlugin {
 
     this.headerDiv = null;
     this.bodyDiv = null;
+    this.isShoppingCartModalOpen = false;
 
     this.brandId = brandId;
     this.brand = null;
@@ -56,8 +57,8 @@ class RalucePlugin {
 
     if (banner && color) {
       rootDiv.innerHTML = `
-        <div onclick="ralucePlugin.toggleShopingCart()" class="shopping-cart-dialog" id="shopping-cart-dialog" style="background-color: ${color}; visibility: hidden;"></div>
-        <div id="raluce-ecommerce-plugin-shopping-cart-modal"></div>
+        <div onclick="ralucePlugin.toggleShopingCart()" class="shopping-cart-dialog" id="shopping-cart-dialog" style="background-color: ${color}; visibility: hidden;display:none;"></div>
+        <div id="raluce-ecommerce-plugin-shopping-cart-modal" style="visibility: hidden;display:none;"></div>
         <div id="raluce-ecommerce-plugin-header">
           <div class="raluce-ecommerce-plugin-picture-box" style="background-image: url('${banner}');"></div>
           <div class="raluce-ecommerce-plugin-color-box" style="background-color: ${color || '#5252dd'};"></div>
@@ -86,6 +87,7 @@ class RalucePlugin {
     if (shoppingCartSize > 0) {
       this.shoppingCartDialog.innerText = shoppingCartSize.toString();
       this.shoppingCartDialog.style.visibility = 'visible';
+      this.shoppingCartDialog.style.display = 'block';
     }
 
     // Calculate price of shopping cart on every update
@@ -99,11 +101,20 @@ class RalucePlugin {
   }
 
   toggleShopingCart() {
+    if (this.isShoppingCartModalOpen) {
+      this.shoppingCartModal.style.visibility = 'hidden';
+      this.shoppingCartModal.style.display = 'none';
+      this.isShoppingCartModalOpen = false;
+      return;
+    }
+
     const cart = shoppingCart.getShoppingCart();
     this.shoppingCartModal.innerHTML = `
       <div class="raluce-ecommerce-plugin-shopping-cart-header" style="background-color:${this.brand.color || '#5252dd'}">
         <h5>Shopping Cart</h5>
-        <button onclick="ralucePlugin.toggleShopingCart()">return</button>
+        <div class="raluce-ecommerce-plugin-shopping-cart-dismiss" onclick="ralucePlugin.toggleShopingCart()">
+
+        </div>
       </div>
       <center class="raluce-ecommerce-plugin-shopping-cart-products">
       ${
@@ -112,6 +123,7 @@ class RalucePlugin {
             <div class="raluce-ecommerce-shopping-cart-product-box">
               <p class="raluce-ecommerce-shopping-cart-product-name">${p.quantity}x ${p.name}</p>
               <p class="raluce-ecommerce-shopping-cart-product-price">$${p.price.cost}</p>
+              <button class="raluce-ecommerce-shopping-cart-delete-product" onclick="ralucePlugin.removeProduct('${p.hash}')">+</button>
             </div>
           `
         }).join('')
@@ -119,6 +131,15 @@ class RalucePlugin {
       </center>
       <button class="raluce-ecommerce-plugin-shopping-cart-pay-button" onclick="ralucePlugin.checkout()">Checkout</button>
     `
+    this.shoppingCartModal.style.visibility = 'visible';
+    this.shoppingCartModal.style.display = 'block';
+    this.isShoppingCartModalOpen = true;
+  }
+
+  removeProduct(hash) {
+    shoppingCart.removeProduct(hash);
+    this.shoppingCartDialog.innerText = shoppingCart.getShoppingCart().length.toString();
+    this.toggleShopingCart();
   }
 
   setView(view, refresh = false) {
@@ -236,7 +257,7 @@ class RalucePlugin {
       franchiseId: this.franchise.id,
       products,
     })
-    .then(({ id }) => console.log(`Shopping cart id: ${id}`))
+    .then(({ id }) => window.open(`https://stores.raluce.com/franchises/${this.franchise.id}/order?shoppingCartId=${id}`))
     .catch(console.error);
   }
 }

@@ -37,7 +37,7 @@ class SelectPickupFranchise {
       <div class="raluce-ecommerce-plugin-container">
           <h1 class="raluce-ecommerce-plugin-order-now-header">Order Now</h1>
           <div class="raluce-ecommerce-plugin-card">
-            <button class="raluce-ecommerce-plugin-goBack-button" onclick="ralucePlugin.goBack()">Return</button>
+            <button class="raluce-ecommerce-plugin-goBack-button" onclick="ralucePlugin.goBack()"></button>
             <div>
               <p class="raluce-ecommerce-plugin-what-is-your-address-question">What's your address?</p>
               <input type="text" id="address-input" autocomplete="off" />
