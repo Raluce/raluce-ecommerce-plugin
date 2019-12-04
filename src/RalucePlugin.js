@@ -93,8 +93,6 @@ class RalucePlugin {
     // Calculate price of shopping cart on every update
     if (this.franchise) {
       shoppingCart.getPrice(this.franchise.id)
-      .then(price => console.log(price))
-      .catch(console.error);
     }
 
     // Todo: Update list of products in shopping cart dialog
@@ -160,6 +158,10 @@ class RalucePlugin {
       }
 
     }).catch(console.error);
+    if (!refresh) {
+      location.href = "#";
+      location.href = "#raluce-ecommerce-plugin-root";
+    }
   }
 
   navigateTo(viewName) {
