@@ -257,9 +257,12 @@ class RalucePlugin {
     const windowReference = window.open();
 
     this.raluce.createShoppingCart({
+      products,
       type: orderType || 'pickup',
       franchiseId: this.franchise.id,
-      products,
+      customer: {
+        address: this.address
+      },
     })
     .then(({ id }) => {
       windowReference.location = `https://stores.raluce.com/franchises/${this.franchise.id}/order?shoppingCartId=${id}`;
